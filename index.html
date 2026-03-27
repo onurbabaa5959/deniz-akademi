@@ -326,3 +326,182 @@
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deniz Akademisi | Profesyonel Eğitim & Telegram Satış</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+    <style>
+        @import url('https://fonts.googleapis.com');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+        .course-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .tg-gradient { background: linear-gradient(135deg, #229ED9 0%, #34B7F1 100%); }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <!-- 1. NAVBAR (ÜST MENÜ) -->
+    <nav class="sticky top-0 z-50 glass px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-200">
+                <i class="fas fa-ship text-xl"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-slate-800 uppercase">Deniz Akademisi</span>
+        </div>
+        <div class="hidden md:flex gap-6 font-bold text-slate-600">
+            <a href="#" class="hover:text-blue-600">Dersler</a>
+            <a href="#" class="hover:text-blue-600">Sınav Soruları</a>
+        </div>
+        <button onclick="openModal('authModal')" class="bg-slate-900 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-600 transition-all shadow-lg">
+            Giriş Yap / Kayıt Ol
+        </button>
+    </nav>
+
+    <!-- 2. HERO (ANA TANITIM) -->
+    <header class="relative bg-slate-900 pt-24 pb-40 px-6 text-center overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com');"></div>
+        <div class="relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Kaptanlık Sınavlarına <br><span class="text-blue-400">Telegram Güvencesiyle</span> Hazırlanın
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 italic">
+                Dersleri seçin, Telegram üzerinden bizimle iletişime geçin ve anında kaynaklara erişin.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#dersler" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition shadow-2xl">Dersleri İncele</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. DERSLER VE SATIŞ ALANI -->
+    <main id="dersler" class="max-w-7xl mx-auto -mt-20 px-6 relative z-10 pb-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="courseGrid">
+            <!-- JavaScript ile Dersler Buraya Gelecek -->
+        </div>
+    </main>
+
+    <!-- 4. SABİT BOT VE DESTEK BUTONLARI -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-40">
+        <button onclick="openModal('ticketModal')" class="w-16 h-16 bg-emerald-500 text-white rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 transition-all" title="Bilet Oluştur">
+            <i class="fas fa-headset text-2xl"></i>
+        </button>
+        <button onclick="toggleAI()" class="w-16 h-16 bg-blue-600 text-white rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 transition-all" title="Yapay Zeka">
+            <i class="fas fa-robot text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- 5. YAPAY ZEKA SOHBET KUTUSU -->
+    <div id="aiBox" class="fixed bottom-28 right-8 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-100 hidden flex-col overflow-hidden z-50">
+        <div class="bg-blue-600 p-5 text-white flex justify-between items-center">
+            <span class="font-bold tracking-wide uppercase text-sm">🤖 Akademi Botu</span>
+            <button onclick="toggleAI()"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="aiMessages" class="h-80 overflow-y-auto p-5 space-y-4 text-sm bg-slate-50">
+            <div class="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm">
+                Merhaba! Ben eğitim asistanınım. Motivasyon veya ders içerikleri hakkında sana nasıl yardımcı olabilirim?
+            </div>
+        </div>
+        <div class="p-4 bg-white border-t flex gap-2">
+            <input id="aiInput" type="text" placeholder="Mesajınızı yazın..." class="flex-1 bg-slate-100 rounded-xl px-4 py-2 outline-none focus:ring-2 ring-blue-500">
+            <button onclick="askAI()" class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 6. MODALLAR (Üyelik & Ticket) -->
+    <div id="modalOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-6">
+        <div id="authModal" class="hidden bg-white w-full max-w-md rounded-3xl p-8 shadow-2xl">
+            <h2 class="text-3xl font-extrabold mb-4 text-slate-800 text-center uppercase">Üye Paneli</h2>
+            <input type="text" placeholder="Kullanıcı Adı" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-4 outline-none focus:ring-2 ring-blue-500">
+            <input type="email" placeholder="E-posta" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-4 outline-none focus:ring-2 ring-blue-500">
+            <input type="password" placeholder="Şifre" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-6 outline-none focus:ring-2 ring-blue-500">
+            <button onclick="alert('Kayıt Başarılı! Artık dersleri satın alabilirsiniz.'); closeModal();" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-blue-600 transition">Hesap Oluştur</button>
+            <button onclick="closeModal()" class="w-full mt-4 text-slate-400 font-bold">KAPAT</button>
+        </div>
+
+        <div id="ticketModal" class="hidden bg-white w-full max-w-lg rounded-3xl p-8 shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4 text-center text-emerald-600 italic uppercase underline">BİLET OLUŞTUR</h2>
+            <textarea id="tMsg" rows="5" placeholder="Sorununuzu yazın, yetkililerimiz e-posta ile size dönsün..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 mb-6 outline-none focus:ring-2 ring-emerald-500"></textarea>
+            <div class="flex gap-3">
+                <button onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-600 py-4 rounded-xl font-bold">Vazgeç</button>
+                <button onclick="sendTicket()" class="flex-1 bg-emerald-500 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-600 transition">Talebi Gönder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. JAVASCRIPT (SİSTEMİN BEYNİ) -->
+    <script>
+        // KENDİ BİLGİLERİNİ BURAYA YAZ
+        const TELEGRAM_USERNAME = "KENDI_KULLANICI_ADIN"; // Burayı değiştir (Örn: onurbaba59)
+
+        const courses = [
+            { n: "Denizde Emniyet", p: "100₺", i: "fa-life-ring" },
+            { n: "Atölye Dersliği", p: "170₺", i: "fa-tools" },
+            { n: "Edebiyat", p: "120₺", i: "fa-book-open" },
+            { n: "Matematik", p: "150₺", i: "fa-calculator" },
+            { n: "İngilizce", p: "140₺", i: "fa-language" },
+            { n: "Din Dersliği", p: "50₺", i: "fa-mosque" },
+            { n: "Fizik", p: "130₺", i: "fa-atom" },
+            { n: "Tarih", p: "50₺", i: "fa-landmark" }
+        ];
+
+        const grid = document.getElementById('courseGrid');
+        courses.forEach(c => {
+            const message = encodeURIComponent(`${c.n} dersi için bakiye yüklemek ve ders notlarını satın almak istiyorum.`);
+            grid.innerHTML += `
+                <div class="course-card bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-2xl transition-all group relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas ${c.i}"></i>
+                    </div>
+                    <div class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-black mb-4 tracking-wider uppercase">${c.p}</div>
+                    <h3 class="text-2xl font-extrabold text-slate-800 mb-2">${c.n}</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8 font-medium italic">Sınav soruları ve ders notları dahildir.</p>
+                    <a href="https://t.me{TELEGRAM_USERNAME}?text=${message}" target="_blank" 
+                       class="w-full tg-gradient text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-blue-100">
+                        <i class="fab fa-telegram-plane"></i> Hemen Satın Al
+                    </a>
+                </div>
+            `;
+        });
+
+        // Yardımcı Fonksiyonlar
+        function openModal(id) {
+            document.getElementById('modalOverlay').classList.remove('hidden');
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+            document.querySelectorAll('#modalOverlay > div').forEach(m => m.classList.add('hidden'));
+        }
+        function toggleAI() {
+            const ai = document.getElementById('aiBox');
+            ai.classList.toggle('hidden');
+            ai.classList.add('flex');
+        }
+        function askAI() {
+            const inp = document.getElementById('aiInput');
+            const box = document.getElementById('aiMessages');
+            if(!inp.value) return;
+            box.innerHTML += `<div class="ml-10 bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none shadow-md"><b>Siz:</b> ${inp.value}</div>`;
+            setTimeout(() => {
+                box.innerHTML += `<div class="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm"><b>Bot:</b> Harika bir soru! Motivasyonunu yüksek tut Kaptan. ${inp.value} konusu hakkındaki tüm detaylar ders paketlerimizde mevcut. Telegram üzerinden iletişime geçebilirsin.</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 600);
+            inp.value = "";
+        }
+        function sendTicket() {
+            const msg = document.getElementById('tMsg').value;
+            if(!msg) return alert("Lütfen sorununuzu yazın.");
+            alert("✅ Destek Talebiniz Alındı!\n\nYetkililerimiz belirttiğiniz e-posta üzerinden size dönüş yapacaktır.");
+            closeModal();
+            document.getElementById('tMsg').value = "";
+        }
+    </script>
+</body>
+</html>
